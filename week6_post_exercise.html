@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perfect Tenses & Subject-Verb Agreement — Post-Session Practice</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&family=DM+Serif+Display&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:    #1A3A5C;
+    --teal:    #2E86AB;
+    --amber:   #F6AE2D;
+    --red:     #D9534F;
+    --green:   #3DAA6E;
+    --slate:   #F0F4F8;
+    --card:    #FFFFFF;
+    --muted:   #6B8FA8;
+    --text:    #1C2B36;
+    --border:  #D0DDE8;
+    --shadow:  0 2px 16px rgba(26,58,92,0.10);
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--slate);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  header {
+    background: var(--navy);
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  }
+  .header-title { color: white; font-family: 'DM Serif Display', serif; font-size: 1.15rem; line-height: 1.2; }
+  .header-sub   { color: var(--amber); font-size: 0.72rem; font-weight: 500; margin-top: 2px; letter-spacing: 0.04em; text-transform: uppercase; }
+  .score-box {
+    background: rgba(255,255,255,0.10);
+    border: 1.5px solid var(--amber);
+    border-radius: 8px;
+    padding: 6px 16px;
+    text-align: center;
+  }
+  .score-box .score-num  { color: var(--amber); font-size: 1.4rem; font-weight: 700; line-height: 1; }
+  .score-box .score-lbl  { color: rgba(255,255,255,0.7); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.06em; }
+
+  /* ── Level Staircase Nav ── */
+  .staircase-wrap {
+    background: var(--navy);
+    padding: 0 32px 22px;
+    display: flex;
+    align-items: flex-end;
+    gap: 0;
+    border-bottom: 3px solid var(--amber);
+  }
+  .step-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    padding: 0 4px;
+    position: relative;
+    outline: none;
+  }
+  .step-block {
+    width: 90px;
+    border-radius: 6px 6px 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.22s;
+    padding: 8px 6px 6px;
+    border: 2px solid transparent;
+    cursor: pointer;
+  }
+  .step-btn:nth-child(1) .step-block { height: 46px; background: rgba(255,255,255,0.10); }
+  .step-btn:nth-child(2) .step-block { height: 60px; background: rgba(255,255,255,0.10); }
+  .step-btn:nth-child(3) .step-block { height: 74px; background: rgba(255,255,255,0.10); }
+  .step-btn:nth-child(4) .step-block { height: 88px; background: rgba(255,255,255,0.10); }
+  .step-btn:nth-child(5) .step-block { height: 102px; background: rgba(255,255,255,0.10); }
+
+  .step-btn.active .step-block,
+  .step-btn:hover .step-block  { background: var(--amber); border-color: var(--amber); }
+  .step-btn.active .step-block .step-label,
+  .step-btn:hover .step-block .step-label { color: var(--navy); }
+  .step-btn.active .step-block .step-tag,
+  .step-btn:hover .step-block .step-tag  { color: rgba(26,58,92,0.7); }
+  .step-btn.locked .step-block { opacity: 0.4; cursor: not-allowed; }
+
+  .step-label { color: white; font-weight: 700; font-size: 0.85rem; }
+  .step-tag   { color: rgba(255,255,255,0.65); font-size: 0.62rem; text-align: center; line-height: 1.2; margin-top: 2px; }
+
+  /* ── Main layout ── */
+  main { max-width: 860px; margin: 0 auto; padding: 32px 20px 60px; }
+
+  /* ── Level header ── */
+  .level-header { margin-bottom: 22px; }
+  .level-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--navy); color: white;
+    border-radius: 20px; padding: 4px 14px; font-size: 0.8rem; font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .level-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); }
+  .level-title { font-family: 'DM Serif Display', serif; font-size: 1.7rem; color: var(--navy); line-height: 1.2; }
+  .level-desc  { color: var(--muted); font-size: 0.9rem; margin-top: 4px; }
+
+  /* ── Progress bar ── */
+  .progress-wrap { margin-bottom: 24px; }
+  .progress-track { background: var(--border); border-radius: 8px; height: 6px; overflow: hidden; }
+  .progress-fill  { background: var(--amber); height: 100%; border-radius: 8px; transition: width 0.4s ease; }
+  .progress-text  { font-size: 0.75rem; color: var(--muted); margin-top: 4px; }
+
+  /* ── Exercise card ── */
+  .ex-card {
+    background: var(--card);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 28px 32px;
+    margin-bottom: 16px;
+    border-left: 4px solid var(--navy);
+    animation: fadeUp 0.3s ease;
+  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  .q-counter { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+  .q-text    { font-size: 1.05rem; line-height: 1.6; margin-bottom: 20px; color: var(--text); }
+  .q-text em { background: rgba(246,174,45,0.18); border-radius: 3px; padding: 0 3px; font-style: normal; font-weight: 600; color: var(--navy); }
+  .q-text .blank { display: inline-block; border-bottom: 2px solid var(--navy); min-width: 120px; text-align: center; color: var(--muted); font-style: italic; font-size: 0.9rem; }
+
+  /* ── MCQ Options ── */
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .opt-btn {
+    background: var(--slate);
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    padding: 11px 16px;
+    text-align: left;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text);
+    transition: all 0.18s;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .opt-btn:hover:not(:disabled) { border-color: var(--teal); background: #E8F4F8; }
+  .opt-btn.correct  { background: #EAF7EF; border-color: var(--green); color: var(--green); }
+  .opt-btn.wrong    { background: #FEF0F0; border-color: var(--red);   color: var(--red); }
+  .opt-btn:disabled { cursor: default; }
+  .opt-icon { width: 22px; height: 22px; border-radius: 50%; background: var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; flex-shrink: 0; font-weight: 700; }
+  .opt-btn.correct .opt-icon { background: var(--green); color: white; }
+  .opt-btn.wrong    .opt-icon { background: var(--red);   color: white; }
+
+  /* ── Drag-drop ── */
+  .drag-arena { display: flex; gap: 20px; flex-wrap: wrap; }
+  .drop-zone {
+    flex: 1; min-width: 160px;
+    border: 2px dashed var(--border);
+    border-radius: 10px;
+    padding: 12px;
+    min-height: 90px;
+    background: var(--slate);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .drop-zone.drag-over { border-color: var(--teal); background: #E8F4F8; }
+  .drop-zone.correct-zone { border-color: var(--green); background: #EAF7EF; }
+  .drop-zone.wrong-zone   { border-color: var(--red);   background: #FEF0F0; }
+  .drop-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 8px; }
+  .chip-bank  { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .chip {
+    background: var(--navy); color: white;
+    padding: 6px 14px; border-radius: 20px;
+    font-size: 0.82rem; cursor: grab;
+    user-select: none; transition: opacity 0.2s, transform 0.15s;
+    border: none; font-family: 'DM Sans', sans-serif;
+  }
+  .chip:active { transform: scale(0.96); cursor: grabbing; }
+  .chip.placed { opacity: 0.35; cursor: default; }
+  .chip-in-zone { background: var(--navy); color: white; padding: 5px 12px; border-radius: 16px; font-size: 0.8rem; margin: 3px; display: inline-block; }
+
+  /* ── Subject Hunter (L3) ── */
+  .sentence-tokens { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+  .token {
+    padding: 6px 12px; border-radius: 6px;
+    border: 2px solid var(--border);
+    background: var(--slate); font-size: 0.95rem;
+    cursor: pointer; transition: all 0.18s;
+  }
+  .token:hover { border-color: var(--teal); background: #E8F4F8; }
+  .token.selected-subject { border-color: var(--amber); background: rgba(246,174,45,0.18); font-weight: 700; color: var(--navy); }
+  .token.correct-subject  { border-color: var(--green); background: #EAF7EF; }
+  .token.wrong-subject    { border-color: var(--red);   background: #FEF0F0; }
+  .subject-prompt { font-size: 0.85rem; color: var(--muted); margin-bottom: 12px; font-style: italic; }
+
+  /* ── Error Hunt (L4) ── */
+  .error-para { font-size: 1.0rem; line-height: 1.9; letter-spacing: 0.01em; }
+  .err-word {
+    cursor: pointer;
+    border-bottom: 2px dotted var(--muted);
+    padding: 1px 1px;
+    transition: background 0.15s;
+    border-radius: 2px;
+  }
+  .err-word:hover { background: rgba(246,174,45,0.2); }
+  .err-word.flagged { background: rgba(217,83,79,0.15); border-bottom: 2px solid var(--red); color: var(--red); font-weight: 600; }
+  .err-word.confirmed-error { background: #FEF0F0; border-bottom: 2px solid var(--red); color: var(--red); font-weight: 700; }
+  .err-word.confirmed-correct { background: #EAF7EF; border-bottom: 2px solid var(--green); color: var(--green); font-weight: 700; }
+  .err-hint { font-size: 0.83rem; color: var(--muted); margin-top: 10px; }
+  .fix-panel { margin-top: 14px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .fix-input {
+    border: 2px solid var(--border); border-radius: 6px;
+    padding: 7px 12px; font-size: 0.9rem; font-family: 'DM Sans', sans-serif;
+    outline: none; width: 220px; transition: border-color 0.2s;
+  }
+  .fix-input:focus { border-color: var(--teal); }
+
+  /* ── Open Production (L5) ── */
+  .open-prompt-box {
+    background: var(--slate); border-radius: 10px;
+    padding: 16px 20px; margin-bottom: 18px;
+    border-left: 3px solid var(--amber);
+    font-size: 0.95rem; line-height: 1.6;
+  }
+  .open-prompt-box strong { color: var(--navy); }
+  .open-textarea {
+    width: 100%; min-height: 80px;
+    border: 2px solid var(--border); border-radius: 8px;
+    padding: 12px 14px; font-size: 0.95rem;
+    font-family: 'DM Sans', sans-serif; color: var(--text);
+    resize: vertical; outline: none; transition: border-color 0.2s;
+    line-height: 1.6;
+  }
+  .open-textarea:focus { border-color: var(--teal); }
+  .model-answer {
+    background: #EAF7EF; border-radius: 8px;
+    padding: 14px 18px; margin-top: 14px;
+    border-left: 3px solid var(--green);
+    font-size: 0.9rem; line-height: 1.7;
+    display: none;
+  }
+  .model-answer.shown { display: block; animation: fadeUp 0.3s ease; }
+  .model-answer .ma-label { font-weight: 700; color: var(--green); margin-bottom: 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .selfcheck { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .selfcheck-btn {
+    padding: 6px 16px; border-radius: 20px; border: 2px solid var(--border);
+    font-size: 0.82rem; cursor: pointer; font-family: 'DM Sans', sans-serif;
+    background: var(--card); transition: all 0.18s;
+  }
+  .selfcheck-btn:hover { border-color: var(--teal); }
+  .selfcheck-btn.got-it   { border-color: var(--green); background: #EAF7EF; color: var(--green); }
+  .selfcheck-btn.close    { border-color: var(--amber); background: rgba(246,174,45,0.12); color: #b47d00; }
+  .selfcheck-btn.not-yet  { border-color: var(--red);   background: #FEF0F0;   color: var(--red); }
+
+  /* ── Buttons ── */
+  .btn {
+    padding: 10px 22px; border-radius: 8px; border: none;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 600;
+    cursor: pointer; transition: all 0.18s; display: inline-flex; align-items: center; gap: 6px;
+  }
+  .btn-primary { background: var(--navy); color: white; }
+  .btn-primary:hover { background: #243F6B; }
+  .btn-amber  { background: var(--amber); color: var(--navy); }
+  .btn-amber:hover  { background: #e0a020; }
+  .btn-outline { background: transparent; color: var(--navy); border: 2px solid var(--navy); }
+  .btn-outline:hover { background: var(--navy); color: white; }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .btn-row { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; align-items: center; }
+
+  /* ── Feedback toast ── */
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(60px);
+    background: var(--navy); color: white;
+    border-radius: 10px; padding: 12px 22px;
+    font-size: 0.9rem; font-weight: 500;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+    opacity: 0; transition: all 0.3s; z-index: 200; white-space: nowrap;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .toast.success { background: var(--green); }
+  .toast.error   { background: var(--red); }
+
+  /* ── Explanation box ── */
+  .explain {
+    background: rgba(26,58,92,0.05); border-radius: 8px;
+    padding: 12px 16px; margin-top: 14px;
+    font-size: 0.88rem; line-height: 1.6; color: var(--text);
+    border-left: 3px solid var(--navy);
+    display: none;
+  }
+  .explain.shown { display: block; animation: fadeUp 0.3s ease; }
+  .explain strong { color: var(--navy); }
+
+  /* ── Completion banner ── */
+  .complete-banner {
+    background: var(--navy); border-radius: 14px;
+    padding: 36px; text-align: center;
+    color: white; display: none; animation: fadeUp 0.4s ease;
+  }
+  .complete-banner.shown { display: block; }
+  .complete-banner h2 { font-family: 'DM Serif Display', serif; font-size: 1.8rem; margin-bottom: 8px; }
+  .complete-banner p  { color: rgba(255,255,255,0.75); font-size: 0.95rem; }
+  .complete-score { font-size: 3rem; font-weight: 700; color: var(--amber); margin: 16px 0; }
+
+  /* ── Utility ── */
+  .tag { display: inline-block; padding: 2px 9px; border-radius: 12px; font-size: 0.72rem; font-weight: 600; margin-left: 8px; vertical-align: middle; }
+  .tag-pp  { background: rgba(26,58,92,0.12);  color: var(--navy); }
+  .tag-sva { background: rgba(61,170,110,0.15); color: #2a7a4c; }
+  .hidden  { display: none !important; }
+  hr.divider { border: none; border-top: 1.5px solid var(--border); margin: 24px 0; }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="header-title">Perfect Tenses & Subject-Verb Agreement</div>
+    <div class="header-sub">Post-Session Practice · Weeks 3–3</div>
+  </div>
+  <div class="score-box">
+    <div class="score-num" id="scoreDisplay">0</div>
+    <div class="score-lbl">points</div>
+  </div>
+</header>
+
+<!-- Staircase Nav -->
+<div class="staircase-wrap">
+  <button class="step-btn active" onclick="goLevel(1)" id="tab1">
+    <div class="step-block"><div class="step-label">L1</div><div class="step-tag">Recognition</div></div>
+  </button>
+  <button class="step-btn locked" onclick="goLevel(2)" id="tab2">
+    <div class="step-block"><div class="step-label">L2</div><div class="step-tag">Verb Form</div></div>
+  </button>
+  <button class="step-btn locked" onclick="goLevel(3)" id="tab3">
+    <div class="step-block"><div class="step-label">L3</div><div class="step-tag">Subject<br>Hunter</div></div>
+  </button>
+  <button class="step-btn locked" onclick="goLevel(4)" id="tab4">
+    <div class="step-block"><div class="step-label">L4</div><div class="step-tag">Error<br>Hunt</div></div>
+  </button>
+  <button class="step-btn locked" onclick="goLevel(5)" id="tab5">
+    <div class="step-block"><div class="step-label">L5</div><div class="step-tag">Build<br>Mode</div></div>
+  </button>
+</div>
+
+<main>
+  <!-- LEVEL 1: DRAG & DROP TENSE RECOGNITION -->
+  <div id="level1">
+    <div class="level-header">
+      <div class="level-badge"><span class="dot"></span>Level 1 · Basic</div>
+      <div class="level-title">Tense Recognition</div>
+      <div class="level-desc">Drag each sentence to the correct tense category. Focus on the verb form and the time signals.</div>
+    </div>
+
+    <div class="ex-card">
+      <div class="chip-bank" id="chipBank">
+        <div class="chip" draggable="true" data-id="s1" ondragstart="dragStart(event)">She has reflected on the problem.</div>
+        <div class="chip" draggable="true" data-id="s2" ondragstart="dragStart(event)">They had already left before I arrived.</div>
+        <div class="chip" draggable="true" data-id="s3" ondragstart="dragStart(event)">He has never witnessed such bias.</div>
+        <div class="chip" draggable="true" data-id="s4" ondragstart="dragStart(event)">She had internalized the principle years ago.</div>
+        <div class="chip" draggable="true" data-id="s5" ondragstart="dragStart(event)">By next year, he will have completed the course.</div>
+        <div class="chip" draggable="true" data-id="s6" ondragstart="dragStart(event)">We have not addressed this issue yet.</div>
+      </div>
+
+      <div class="drag-arena">
+        <div class="drop-zone" id="zone-pp" ondragover="dragOver(event)" ondrop="dropChip(event,'pp')" ondragleave="dragLeave(event)">
+          <div class="drop-label">Present Perfect</div>
+        </div>
+        <div class="drop-zone" id="zone-past" ondragover="dragOver(event)" ondrop="dropChip(event,'past')" ondragleave="dragLeave(event)">
+          <div class="drop-label">Past Perfect</div>
+        </div>
+        <div class="drop-zone" id="zone-fut" ondragover="dragOver(event)" ondrop="dropChip(event,'fut')" ondragleave="dragLeave(event)">
+          <div class="drop-label">Future Perfect</div>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="checkDrag()">Check Answers</button>
+        <button class="btn btn-outline" onclick="resetDrag()">Reset</button>
+      </div>
+      <div class="explain" id="dragExplain">
+        <strong>Review:</strong><br>
+        Present Perfect = have/has + V3 → connects past to now. <em>Has reflected, has not addressed, has never witnessed.</em><br>
+        Past Perfect = had + V3 → before another past moment. <em>Had left, had internalized.</em><br>
+        Future Perfect = will have + V3 → completed before a future point. <em>Will have completed.</em>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-amber" onclick="completeLevel(1)" id="l1next" style="display:none">Next Level →</button>
+    </div>
+  </div>
+
+  <!-- LEVEL 2: MCQ VERB FORM -->
+  <div id="level2" class="hidden">
+    <div class="level-header">
+      <div class="level-badge"><span class="dot"></span>Level 2 · Elementary</div>
+      <div class="level-title">Choose the Correct Verb Form</div>
+      <div class="level-desc">Select the grammatically correct option. Pay attention to participle forms, have/has, and SVA traps.</div>
+    </div>
+    <div id="l2questions"></div>
+    <div class="btn-row">
+      <button class="btn btn-amber" onclick="completeLevel(2)" id="l2next" style="display:none">Next Level →</button>
+    </div>
+  </div>
+
+  <!-- LEVEL 3: SUBJECT HUNTER -->
+  <div id="level3" class="hidden">
+    <div class="level-header">
+      <div class="level-badge"><span class="dot"></span>Level 3 · Intermediate</div>
+      <div class="level-title">Subject Hunter</div>
+      <div class="level-desc">Two-step challenge: first click the TRUE subject of each sentence, then choose the correct verb. Watch out for distracting phrases!</div>
+    </div>
+    <div id="l3questions"></div>
+    <div class="btn-row">
+      <button class="btn btn-amber" onclick="completeLevel(3)" id="l3next" style="display:none">Next Level →</button>
+    </div>
+  </div>
+
+  <!-- LEVEL 4: ERROR HUNT -->
+  <div id="level4" class="hidden">
+    <div class="level-header">
+      <div class="level-badge"><span class="dot"></span>Level 4 · Upper-Intermediate</div>
+      <div class="level-title">Essay Error Hunt</div>
+      <div class="level-desc">This paragraph contains <strong>4 grammar errors</strong> — a mix of perfect tense and subject-verb agreement mistakes. Click on the word you think is wrong, then type the correction.</div>
+    </div>
+    <div class="ex-card" id="errorHuntCard">
+      <div class="q-text" id="errorPara"></div>
+      <div class="err-hint">💡 Click any word you think is incorrect. Found: <span id="errFoundCount">0</span>/4</div>
+      <div id="fixPanel"></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="checkAllErrors()">Check All Errors</button>
+      <button class="btn btn-amber" onclick="completeLevel(4)" id="l4next" style="display:none">Next Level →</button>
+    </div>
+    <div class="explain" id="l4explain"></div>
+  </div>
+
+  <!-- LEVEL 5: BUILD MODE -->
+  <div id="level5" class="hidden">
+    <div class="level-header">
+      <div class="level-badge"><span class="dot"></span>Level 5 · Advanced</div>
+      <div class="level-title">Build Mode — Open Production</div>
+      <div class="level-desc">Write your own sentences from a prompt. Reveal the model answer and honestly grade yourself. There may be more than one correct answer!</div>
+    </div>
+    <div id="l5questions"></div>
+    <div class="btn-row" style="margin-top:28px">
+      <button class="btn btn-amber" onclick="showCompletion()" id="l5finish" style="display:none">🎉 Finish Practice</button>
+    </div>
+  </div>
+
+  <!-- COMPLETION BANNER -->
+  <div class="complete-banner" id="completeBanner">
+    <h2>Practice Complete!</h2>
+    <div class="complete-score" id="finalScore"></div>
+    <p id="finalMsg"></p>
+    <div style="margin-top:24px">
+      <button class="btn btn-amber" onclick="restartAll()">Start Again</button>
+    </div>
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ─────────── State ─────────── */
+let score = 0;
+let levelsUnlocked = [1];
+const dragAnswers = { s1:'pp', s2:'past', s3:'pp', s4:'past', s5:'fut', s6:'pp' };
+let dragPlaced = {};
+let dragChecked = false;
+
+/* ─────────── Score ─────────── */
+function addScore(pts) {
+  score += pts;
+  document.getElementById('scoreDisplay').textContent = score;
+}
+function showToast(msg, type='') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show ' + type;
+  setTimeout(()=>{ t.className = 'toast'; }, 2200);
+}
+
+/* ─────────── Level nav ─────────── */
+function goLevel(n) {
+  if (!levelsUnlocked.includes(n)) return;
+  document.querySelectorAll('[id^="level"]').forEach(el => el.classList.add('hidden'));
+  document.getElementById('level'+n).classList.remove('hidden');
+  document.querySelectorAll('.step-btn').forEach((b,i)=>{
+    b.classList.remove('active');
+    if (i+1 === n) b.classList.add('active');
+  });
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function unlockLevel(n) {
+  if (!levelsUnlocked.includes(n)) {
+    levelsUnlocked.push(n);
+    const tab = document.getElementById('tab'+n);
+    if (tab) tab.classList.remove('locked');
+  }
+}
+function completeLevel(n) {
+  unlockLevel(n+1);
+  if (n < 5) goLevel(n+1);
+}
+
+/* ─────────── L1: Drag & Drop ─────────── */
+let draggingId = null;
+function dragStart(e) {
+  draggingId = e.target.dataset.id;
+}
+function dragOver(e) {
+  e.preventDefault();
+  e.currentTarget.classList.add('drag-over');
+}
+function dragLeave(e) {
+  e.currentTarget.classList.remove('drag-over');
+}
+function dropChip(e, zone) {
+  e.preventDefault();
+  e.currentTarget.classList.remove('drag-over');
+  if (!draggingId || dragChecked) return;
+  // remove from any previous zone
+  Object.keys(dragPlaced).forEach(k => { if (dragPlaced[k] === draggingId) delete dragPlaced[k]; });
+  // remove from all zones visually
+  document.querySelectorAll('.chip-in-zone').forEach(c => {
+    if (c.dataset.id === draggingId) c.remove();
+  });
+  dragPlaced[zone] = dragPlaced[zone] || [];
+  if (!Array.isArray(dragPlaced[zone])) dragPlaced[zone] = [dragPlaced[zone]];
+  dragPlaced[zone].push(draggingId);
+  // show in zone
+  const chipText = document.querySelector(`.chip[data-id="${draggingId}"]`).textContent;
+  const span = document.createElement('span');
+  span.className = 'chip-in-zone'; span.dataset.id = draggingId;
+  span.textContent = chipText;
+  e.currentTarget.appendChild(span);
+  // mark original as placed
+  document.querySelector(`.chip[data-id="${draggingId}"]`).classList.add('placed');
+  draggingId = null;
+}
+function checkDrag() {
+  if (dragChecked) return;
+  let correct = 0;
+  const correctMap = { pp: ['s1','s3','s6'], past: ['s2','s4'], fut: ['s5'] };
+  ['pp','past','fut'].forEach(zone => {
+    const placed = dragPlaced[zone] || [];
+    const correct_ids = correctMap[zone];
+    const zoneEl = document.getElementById('zone-'+zone);
+    const allCorrect = placed.length > 0 && placed.every(id => correct_ids.includes(id)) && correct_ids.every(id => placed.includes(id));
+    if (allCorrect) { zoneEl.classList.add('correct-zone'); correct++; }
+    else zoneEl.classList.add('wrong-zone');
+  });
+  dragChecked = true;
+  const pts = correct === 3 ? 15 : correct * 4;
+  addScore(pts);
+  document.getElementById('dragExplain').classList.add('shown');
+  showToast(correct === 3 ? '✓ All correct! +15 pts' : `${correct}/3 zones correct — check the review below`, correct===3?'success':'error');
+  document.getElementById('l1next').style.display = 'inline-flex';
+}
+function resetDrag() {
+  dragPlaced = {}; dragChecked = false;
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('placed'));
+  document.querySelectorAll('.chip-in-zone').forEach(c => c.remove());
+  ['pp','past','fut'].forEach(z => {
+    const el = document.getElementById('zone-'+z);
+    el.classList.remove('correct-zone','wrong-zone');
+  });
+  document.getElementById('dragExplain').classList.remove('shown');
+}
+
+/* ─────────── L2: MCQ Data & Render ─────────── */
+const l2data = [
+  {
+    topic: 'Perfect Tenses', tag: 'pp',
+    q: 'Society ______ the principle of dignity, but discrimination still exists in many institutions.',
+    opts: ['has internalized', 'have internalized', 'had internalize'],
+    answer: 0,
+    explain: '<strong>has internalized</strong> — subject is <em>society</em> (3rd person singular → has), and the past participle is <em>internalized</em> (regular verb).'
+  },
+  {
+    topic: 'Perfect Tenses', tag: 'pp',
+    q: 'By the time the policy took effect, the committee ______ a full review.',
+    opts: ['has completed', 'had completed', 'have completed'],
+    answer: 1,
+    explain: '<strong>had completed</strong> — we need Past Perfect because the review was finished <em>before</em> the policy took effect (past before past).'
+  },
+  {
+    topic: 'SVA', tag: 'sva',
+    q: 'Each of the researchers ______ reflected critically on their own privilege.',
+    opts: ['have', 'has', 'had have'],
+    answer: 1,
+    explain: '<strong>has</strong> — <em>each</em> is an indefinite pronoun and is always singular, even though <em>researchers</em> follows it.'
+  },
+  {
+    topic: 'Perfect Tenses', tag: 'pp',
+    q: 'The organisation ______ yet to acknowledge the consequences of its past actions.',
+    opts: ['has been', 'have been', 'had been'],
+    answer: 0,
+    explain: '<strong>has been</strong> — the organisation is singular (3rd person → has). The time marker <em>yet</em> signals Present Perfect.'
+  },
+  {
+    topic: 'SVA', tag: 'sva',
+    q: 'Neither the board members nor the director ______ endorsed the new affirmation policy.',
+    opts: ['have', 'has', 'had has'],
+    answer: 1,
+    explain: '<strong>has</strong> — with <em>neither...nor</em>, the verb agrees with the <em>nearer</em> subject. <em>Director</em> is singular → has.'
+  },
+  {
+    topic: 'Perfect Tenses', tag: 'pp',
+    q: 'By next year, she ______ the programme for a full decade.',
+    opts: ['will have led', 'will has led', 'has led'],
+    answer: 0,
+    explain: '<strong>will have led</strong> — Future Perfect structure: will have + past participle. The verb <em>lead</em> is irregular → <em>led</em>.'
+  },
+  {
+    topic: 'SVA', tag: 'sva',
+    q: 'The evidence of systemic discrimination, along with several testimonials, ______ submitted to the committee.',
+    opts: ['have been', 'has been', 'had been'],
+    answer: 1,
+    explain: '<strong>has been</strong> — the true subject is <em>evidence</em> (singular). The phrase <em>along with several testimonials</em> is an interrupting phrase, not part of the subject.'
+  },
+  {
+    topic: 'Perfect Tenses', tag: 'pp',
+    q: 'I ______ such open ignorance before — it was deeply troubling.',
+    opts: ['have never witnessed', 'had never witnessed', 'have never witness'],
+    answer: 1,
+    explain: '<strong>had never witnessed</strong> — the main verb is in the past (<em>was</em>), so the earlier experience uses Past Perfect: <em>had witnessed</em>.'
+  }
+];
+
+let l2answered = {};
+function renderL2() {
+  const container = document.getElementById('l2questions');
+  l2data.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'ex-card'; div.id = 'l2q'+i;
+    div.innerHTML = `
+      <div class="q-counter">Question ${i+1} of ${l2data.length}
+        <span class="tag tag-${q.tag}">${q.topic}</span>
+      </div>
+      <div class="q-text">${q.q.replace('______','<span class="blank">______</span>')}</div>
+      <div class="options">
+        ${q.opts.map((o,j)=>`
+          <button class="opt-btn" onclick="answerL2(${i},${j})" id="l2opt_${i}_${j}">
+            <span class="opt-icon">${String.fromCharCode(65+j)}</span>${o}
+          </button>`).join('')}
+      </div>
+      <div class="explain" id="l2exp${i}">${q.explain}</div>`;
+    container.appendChild(div);
+  });
+}
+function answerL2(qi, oi) {
+  if (l2answered[qi] !== undefined) return;
+  l2answered[qi] = oi;
+  const q = l2data[qi];
+  for (let j=0; j<q.opts.length; j++) {
+    const btn = document.getElementById(`l2opt_${qi}_${j}`);
+    btn.disabled = true;
+    if (j === q.answer) { btn.classList.add('correct'); btn.querySelector('.opt-icon').textContent = '✓'; }
+    else if (j === oi)  { btn.classList.add('wrong');   btn.querySelector('.opt-icon').textContent = '✗'; }
+  }
+  document.getElementById('l2exp'+qi).classList.add('shown');
+  if (oi === q.answer) { addScore(8); showToast('Correct! +8 pts','success'); }
+  else showToast('Not quite — see the explanation below','error');
+  if (Object.keys(l2answered).length === l2data.length) {
+    setTimeout(()=>{ document.getElementById('l2next').style.display = 'inline-flex'; }, 400);
+  }
+}
+
+/* ─────────── L3: Subject Hunter Data & Render ─────────── */
+const l3data = [
+  {
+    q: 'The principle of these outdated policies are no longer relevant.',
+    tokens: ['The', 'principle', 'of', 'these', 'outdated', 'policies', 'are', 'no', 'longer', 'relevant'],
+    trueSubject: 'principle',
+    verbOpts: ['is', 'are', 'were'],
+    correctVerb: 0,
+    explain: 'True subject: <strong>principle</strong> (singular). The phrase <em>of these outdated policies</em> is a distraction — bracket and delete it. → <em>The principle <strong>is</strong> no longer relevant.</em>'
+  },
+  {
+    q: 'Everyone who attended the seminar on discrimination have reflected on their own bias.',
+    tokens: ['Everyone', 'who', 'attended', 'the', 'seminar', 'on', 'discrimination', 'have', 'reflected', 'on', 'their', 'own', 'bias'],
+    trueSubject: 'Everyone',
+    verbOpts: ['have reflected', 'has reflected', 'had reflected'],
+    correctVerb: 1,
+    explain: '<strong>Everyone</strong> is an indefinite pronoun — always singular → <em>has reflected</em>. The relative clause <em>who attended...</em> is a distraction.'
+  },
+  {
+    q: 'Neither the manager nor the employees recognises the privilege embedded in the system.',
+    tokens: ['Neither', 'the', 'manager', 'nor', 'the', 'employees', 'recognises', 'the', 'privilege', 'embedded', 'in', 'the', 'system'],
+    trueSubject: 'employees',
+    verbOpts: ['recognises', 'recognise', 'has recognised'],
+    correctVerb: 1,
+    explain: 'With <strong>neither...nor</strong>, agree with the <em>nearer</em> subject: <strong>employees</strong> (plural) → <em>recognise</em>.'
+  },
+  {
+    q: 'The committee, along with several external advisors, have endorsed the new dignity charter.',
+    tokens: ['The', 'committee', 'along', 'with', 'several', 'external', 'advisors', 'have', 'endorsed', 'the', 'new', 'dignity', 'charter'],
+    trueSubject: 'committee',
+    verbOpts: ['have endorsed', 'has endorsed', 'were endorsing'],
+    correctVerb: 1,
+    explain: 'True subject: <strong>committee</strong> (singular — acting as one unit). The phrase <em>along with several external advisors</em> is an interrupting phrase. → <em>has endorsed</em>.'
+  }
+];
+
+let l3state = {};
+function renderL3() {
+  const container = document.getElementById('l3questions');
+  l3data.forEach((q, qi) => {
+    l3state[qi] = { phase: 'subject', subjectPicked: null, verbPicked: null };
+    const div = document.createElement('div');
+    div.className = 'ex-card'; div.id = 'l3q'+qi;
+    // deduplicate tokens with index
+    const tokenHTML = q.tokens.map((t,ti) =>
+      `<span class="token" id="l3tok_${qi}_${ti}" onclick="pickSubject(${qi},'${t}',${ti})">${t}</span>`
+    ).join(' ');
+    div.innerHTML = `
+      <div class="q-counter">Question ${qi+1} of ${l3data.length} <span class="tag tag-sva">SVA</span></div>
+      <div class="subject-prompt">Step 1: Click the TRUE subject of this sentence.</div>
+      <div class="sentence-tokens" id="l3tokens_${qi}">${tokenHTML}</div>
+      <div id="l3verbphase_${qi}" class="hidden">
+        <div class="subject-prompt" style="margin-top:12px">Step 2: Now choose the correct verb form.</div>
+        <div class="options">
+          ${q.verbOpts.map((v,vi)=>`
+            <button class="opt-btn" onclick="pickVerb(${qi},${vi})" id="l3vopt_${qi}_${vi}">
+              <span class="opt-icon">${String.fromCharCode(65+vi)}</span>${v}
+            </button>`).join('')}
+        </div>
+      </div>
+      <div class="explain" id="l3exp${qi}">${q.explain}</div>`;
+    container.appendChild(div);
+  });
+}
+function pickSubject(qi, word, ti) {
+  if (l3state[qi].phase !== 'subject') return;
+  // clear previous selection
+  document.querySelectorAll(`#l3tokens_${qi} .token`).forEach(t => t.classList.remove('selected-subject'));
+  l3state[qi].subjectPicked = word;
+  document.getElementById(`l3tok_${qi}_${ti}`).classList.add('selected-subject');
+  const q = l3data[qi];
+  // check
+  if (word === q.trueSubject) {
+    document.getElementById(`l3tok_${qi}_${ti}`).classList.remove('selected-subject');
+    document.getElementById(`l3tok_${qi}_${ti}`).classList.add('correct-subject');
+    document.querySelectorAll(`#l3tokens_${qi} .token`).forEach(t => t.style.cursor = 'default');
+    l3state[qi].phase = 'verb';
+    addScore(5); showToast('Correct subject! +5 pts — now pick the verb','success');
+    document.getElementById(`l3verbphase_${qi}`).classList.remove('hidden');
+  } else {
+    document.getElementById(`l3tok_${qi}_${ti}`).classList.add('wrong-subject');
+    showToast('Not the main subject — try again','error');
+    setTimeout(()=>{ document.getElementById(`l3tok_${qi}_${ti}`).classList.remove('wrong-subject','selected-subject'); }, 800);
+  }
+}
+function pickVerb(qi, vi) {
+  if (l3state[qi].phase !== 'verb' || l3state[qi].verbPicked !== null) return;
+  l3state[qi].verbPicked = vi;
+  const q = l3data[qi];
+  for (let j=0; j<q.verbOpts.length; j++) {
+    const btn = document.getElementById(`l3vopt_${qi}_${j}`);
+    btn.disabled = true;
+    if (j === q.correctVerb) { btn.classList.add('correct'); btn.querySelector('.opt-icon').textContent = '✓'; }
+    else if (j === vi) { btn.classList.add('wrong'); btn.querySelector('.opt-icon').textContent = '✗'; }
+  }
+  document.getElementById('l3exp'+qi).classList.add('shown');
+  l3state[qi].phase = 'done';
+  if (vi === q.correctVerb) { addScore(10); showToast('Perfect! +10 pts','success'); }
+  else showToast('Wrong verb — check the explanation','error');
+  const allDone = Object.values(l3state).every(s => s.phase === 'done');
+  if (allDone) setTimeout(()=>{ document.getElementById('l3next').style.display = 'inline-flex'; }, 400);
+}
+
+/* ─────────── L4: Error Hunt ─────────── */
+const errorText = [
+  {w:'In',    err:false},
+  {w:'recent',err:false},
+  {w:'years,',err:false},
+  {w:'society',err:false},
+  {w:'has',   err:false},
+  {w:'became',err:true,  fix:'become',   hint:'Past participle of <em>become</em> is <em>become</em>, not <em>became</em> (that is the simple past form).'},
+  {w:'more',  err:false},
+  {w:'conscious',err:false},
+  {w:'of',    err:false},
+  {w:'discrimination',err:false},
+  {w:'in',    err:false},
+  {w:'many',  err:false},
+  {w:'institutions.',err:false},
+  {w:'Many',  err:false},
+  {w:'institutions',err:false},
+  {w:'has',   err:true,  fix:'have',     hint:'<em>Institutions</em> is plural → use <em>have</em>, not <em>has</em>.'},
+  {w:'already',err:false},
+  {w:'internalized',err:false},
+  {w:'this',  err:false},
+  {w:'principle.',err:false},
+  {w:'Each',  err:false},
+  {w:'of',    err:false},
+  {w:'the',   err:false},
+  {w:'members',err:false},
+  {w:'have',  err:true,  fix:'has',      hint:'<em>Each</em> is an indefinite pronoun — always singular → <em>has</em>, not <em>have</em>.'},
+  {w:'now',   err:false},
+  {w:'affirmed',err:false},
+  {w:'the',   err:false},
+  {w:'dignity',err:false},
+  {w:'of',    err:false},
+  {w:'every',err:false},
+  {w:'individual,',err:false},
+  {w:'and',   err:false},
+  {w:'by',    err:false},
+  {w:'next',  err:false},
+  {w:'year',  err:false},
+  {w:'the',   err:false},
+  {w:'committee',err:false},
+  {w:'will',  err:false},
+  {w:'completed',err:true, fix:'have completed', hint:'Future Perfect needs <em>will have + past participle</em>. Missing <em>have</em> before <em>completed</em>.'},
+  {w:'a',     err:false},
+  {w:'full',  err:false},
+  {w:'review',err:false},
+  {w:'of',    err:false},
+  {w:'its',   err:false},
+  {w:'policies.',err:false},
+];
+let flagged = {};
+let errFixed = {};
+function renderErrorPara() {
+  const para = document.getElementById('errorPara');
+  para.innerHTML = errorText.map((tok,i) =>
+    `<span class="err-word" id="etok${i}" onclick="flagWord(${i})">${tok.w}</span> `
+  ).join('');
+}
+function flagWord(i) {
+  if (flagged[i]) {
+    // unflag
+    delete flagged[i];
+    document.getElementById('etok'+i).classList.remove('flagged');
+    const fp = document.getElementById('fix_'+i);
+    if (fp) fp.remove();
+  } else {
+    flagged[i] = true;
+    document.getElementById('etok'+i).classList.add('flagged');
+    // add fix input
+    const fp = document.getElementById('fixPanel');
+    const row = document.createElement('div');
+    row.className = 'fix-panel'; row.id = 'fix_'+i;
+    row.innerHTML = `
+      <strong style="color:var(--red);font-size:0.88rem">"${errorText[i].w}"</strong>
+      <input class="fix-input" id="fixinput_${i}" placeholder="Type the correction…">
+      <button class="btn btn-primary" style="padding:7px 14px;font-size:0.83rem" onclick="submitFix(${i})">Submit</button>`;
+    fp.appendChild(row);
+  }
+  document.getElementById('errFoundCount').textContent = Object.keys(flagged).length;
+}
+function submitFix(i) {
+  const inp = document.getElementById('fixinput_'+i).value.trim().toLowerCase();
+  const tok = errorText[i];
+  if (!tok.err) {
+    showToast(`"${tok.w}" is actually correct — no error there!`,'error');
+    document.getElementById('etok'+i).classList.remove('flagged');
+    document.getElementById('etok'+i).classList.add('confirmed-correct');
+    delete flagged[i];
+    document.getElementById('fix_'+i).remove();
+    return;
+  }
+  if (inp === tok.fix.toLowerCase()) {
+    document.getElementById('etok'+i).classList.remove('flagged');
+    document.getElementById('etok'+i).classList.add('confirmed-error');
+    document.getElementById('etok'+i).title = `✓ → ${tok.fix}`;
+    addScore(12); showToast(`Correct fix! +12 pts`,'success');
+    errFixed[i] = true;
+    document.getElementById('fix_'+i).innerHTML = `<span style="color:var(--green);font-size:0.88rem">✓ Fixed: <strong>${tok.fix}</strong> — ${tok.hint}</span>`;
+  } else {
+    showToast(`Not quite. Try again!`,'error');
+  }
+  document.getElementById('errFoundCount').textContent = Object.keys(flagged).length;
+}
+function checkAllErrors() {
+  const allErrors = errorText.map((t,i)=>t.err?i:null).filter(i=>i!==null);
+  allErrors.forEach(i => {
+    const el = document.getElementById('etok'+i);
+    if (!errFixed[i]) {
+      el.classList.add('confirmed-error');
+      const fp = document.getElementById('fixPanel');
+      if (!document.getElementById('fix_'+i)) {
+        const row = document.createElement('div');
+        row.className = 'fix-panel'; row.id = 'fix_'+i;
+        row.innerHTML = `<span style="color:var(--red);font-size:0.88rem">✗ <strong>"${errorText[i].w}"</strong> → should be <strong>${errorText[i].fix}</strong> — ${errorText[i].hint}</span>`;
+        fp.appendChild(row);
+      }
+    }
+  });
+  const explain = document.getElementById('l4explain');
+  explain.innerHTML = `<strong>All 4 errors revealed.</strong> Score: ${Object.keys(errFixed).length}/4 fixed correctly.`;
+  explain.classList.add('shown');
+  document.getElementById('l4next').style.display = 'inline-flex';
+}
+
+/* ─────────── L5: Build Mode Data & Render ─────────── */
+const l5data = [
+  {
+    tag: 'pp',
+    prompt: `<strong>Topic: Discrimination and Awareness</strong><br>
+      Write a sentence using the <em>Present Perfect</em> to describe how society's awareness of discrimination has changed up to now.
+      <br><br><strong>Must use:</strong> <em>has / have + past participle</em> &nbsp;|&nbsp; any Week 5 word (e.g. <em>reflected, internalized, recognized, conscience</em>)`,
+    model: [
+      'Society has become increasingly aware of the discrimination embedded in many institutions.',
+      'Many communities have reflected on the consequences of ignoring privilege for so long.',
+      'Young people have internalized a sense of conscience that previous generations often lacked.'
+    ],
+    tip: 'Check: did you use <strong>has/have</strong> correctly based on your subject? Is the past participle form correct (not the simple past)?'
+  },
+  {
+    tag: 'pp',
+    prompt: `<strong>Topic: A Personal Journey</strong><br>
+      Write a TWO-sentence mini-story using both the <em>Past Perfect</em> AND the <em>Present Perfect</em>.
+      <br>Sentence 1 (Past Perfect): something that happened before a past moment.<br>
+      Sentence 2 (Present Perfect): the result or effect that is still true now.`,
+    model: [
+      'Before she joined this course, she had never critically examined her own sense of privilege. Since then, she has developed a much stronger conscience and a deeper understanding of dignity.',
+      'By the time he witnessed the protest, he had already internalized the principles of equality. The experience has left a lasting residue of responsibility in his thinking.'
+    ],
+    tip: 'Check: does your first sentence use <strong>had + past participle</strong>? Does the second use <strong>has/have + past participle</strong> with a sense of present relevance?'
+  },
+  {
+    tag: 'sva',
+    prompt: `<strong>IELTS Task 2 Style</strong><br>
+      Write TWO compound sentences about <em>privilege and educational opportunity</em>. Each sentence must contain one of the following SVA traps:
+      <br>• A collective noun (e.g. <em>the committee, the government, the community</em>)
+      <br>• An indefinite pronoun (e.g. <em>everyone, each, nobody</em>)
+      <br>Make sure your verbs agree correctly with the true subject.`,
+    model: [
+      'The government has failed to address the structural discrimination that limits access to quality education for underprivileged communities.',
+      'Each of the proposed reforms has the potential to reduce the residue of historical inequality that still affects many families today.',
+      'Everyone who benefits from privilege has a moral responsibility to use it consciously in support of others.',
+      'The committee of education experts has endorsed a new framework that affirms the dignity of every student, regardless of background.'
+    ],
+    tip: 'Check: <em>each</em> and <em>everyone</em> → always singular (<strong>has</strong>). <em>The committee</em> → singular as a unit (<strong>has</strong>). Does your sentence make a genuine IELTS-relevant point?'
+  },
+  {
+    tag: 'pp',
+    prompt: `<strong>Advanced Challenge: Future Perfect + SVA</strong><br>
+      Write ONE sophisticated sentence that uses the <em>Future Perfect</em> AND contains a correct SVA agreement with either a collective noun or an indefinite pronoun.
+      <br><br>Example structure: <em>By the time [future event], [subject] will have [past participle]...</em>`,
+    model: [
+      'By the time this generation reaches adulthood, every student who has experienced discrimination will have internalized a powerful sense of dignity and personal principle.',
+      'By 2050, each of the countries that has committed to equality reforms will have dismantled the structural residue of historical privilege.',
+      'By the time the new law takes effect, the committee will have spent years exploring the relationship between ignorance, indecision, and discrimination.'
+    ],
+    tip: 'Check: <strong>will have + past participle</strong> (Future Perfect). And: does your subject-verb agreement hold throughout the sentence — especially for any indefinite pronouns or collective nouns?'
+  }
+];
+
+let l5revealed = {};
+let l5selfchecked = 0;
+function renderL5() {
+  const container = document.getElementById('l5questions');
+  l5data.forEach((q, qi) => {
+    const div = document.createElement('div');
+    div.className = 'ex-card'; div.id = 'l5q'+qi;
+    div.innerHTML = `
+      <div class="q-counter">Task ${qi+1} of ${l5data.length} <span class="tag tag-${q.tag}">${q.tag==='pp'?'Perfect Tenses':'SVA'}</span></div>
+      <div class="open-prompt-box">${q.prompt}</div>
+      <textarea class="open-textarea" id="l5ta_${qi}" placeholder="Write your answer here…"></textarea>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="revealModel(${qi})" id="l5rev${qi}">Show Model Answers</button>
+      </div>
+      <div class="model-answer" id="l5model${qi}">
+        <div class="ma-label">Model Answers (examples — other answers may be correct!)</div>
+        <ul style="padding-left:18px;line-height:2">
+          ${q.model.map(m=>`<li><em>${m}</em></li>`).join('')}
+        </ul>
+        <div style="margin-top:10px;font-size:0.83rem;color:var(--muted)">💡 ${q.tip}</div>
+        <div style="margin-top:12px;font-size:0.83rem;color:var(--text);font-weight:600">How did you do?</div>
+        <div class="selfcheck">
+          <button class="selfcheck-btn got-it"   onclick="selfCheck(${qi},'got-it')">✓ Got it</button>
+          <button class="selfcheck-btn close"     onclick="selfCheck(${qi},'close')">~ Close</button>
+          <button class="selfcheck-btn not-yet"   onclick="selfCheck(${qi},'not-yet')">✗ Need practice</button>
+        </div>
+      </div>`;
+    container.appendChild(div);
+  });
+}
+function revealModel(qi) {
+  if (l5revealed[qi]) return;
+  l5revealed[qi] = true;
+  document.getElementById('l5model'+qi).classList.add('shown');
+  document.getElementById('l5rev'+qi).disabled = true;
+}
+function selfCheck(qi, result) {
+  if (l5selfchecked_ids && l5selfchecked_ids.includes(qi)) return;
+  if (!window.l5selfchecked_ids) window.l5selfchecked_ids = [];
+  window.l5selfchecked_ids.push(qi);
+  const pts = result === 'got-it' ? 20 : result === 'close' ? 10 : 3;
+  addScore(pts);
+  showToast(result==='got-it'?`+${pts} pts — well done!`:result==='close'?`+${pts} pts — keep practising!`:`+${pts} pts — review the examples`, result==='got-it'?'success':'');
+  document.querySelectorAll(`#l5q${qi} .selfcheck-btn`).forEach(b => b.disabled = true);
+  if ((window.l5selfchecked_ids||[]).length === l5data.length) {
+    setTimeout(()=>{ document.getElementById('l5finish').style.display = 'inline-flex'; }, 400);
+  }
+}
+
+/* ─────────── Completion ─────────── */
+function showCompletion() {
+  document.getElementById('level5').classList.add('hidden');
+  const banner = document.getElementById('completeBanner');
+  banner.classList.add('shown');
+  const finalScoreEl = document.getElementById('finalScore');
+  const finalMsgEl = document.getElementById('finalMsg');
+  finalScoreEl.textContent = score + ' pts';
+  const maxScore = 15 + (8*8) + (4*15) + (4*12) + (3*20);
+  const pct = Math.round(score / maxScore * 100);
+  let msg = '';
+  if (pct >= 80) msg = 'Excellent work — you have a strong grip on both perfect tenses and subject-verb agreement. You are ready for Band 6.0+ grammar!';
+  else if (pct >= 55) msg = 'Good effort! Revisit the SVA traps and irregular past participles — those are the areas most likely to trip you up in the exam.';
+  else msg = 'Keep going — return to your lecture notes, then try again. Every attempt builds the grammar intuition IELTS rewards.';
+  finalMsgEl.textContent = msg;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function restartAll() {
+  score = 0; levelsUnlocked = [1]; dragPlaced = {}; dragChecked = false; l2answered = {}; l3state = {}; flagged = {}; errFixed = {};
+  l5revealed = {}; window.l5selfchecked_ids = [];
+  document.getElementById('scoreDisplay').textContent = '0';
+  document.getElementById('completeBanner').classList.remove('shown');
+  document.getElementById('l1next').style.display = 'none';
+  document.getElementById('l2next').style.display = 'none';
+  document.getElementById('l3next').style.display = 'none';
+  document.getElementById('l4next').style.display = 'none';
+  document.getElementById('l5finish').style.display = 'none';
+  document.getElementById('dragExplain').classList.remove('shown');
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('placed'));
+  document.querySelectorAll('.chip-in-zone').forEach(c=>c.remove());
+  ['pp','past','fut'].forEach(z=>{const el=document.getElementById('zone-'+z);el.classList.remove('correct-zone','wrong-zone');});
+  document.getElementById('l2questions').innerHTML = '';
+  document.getElementById('l3questions').innerHTML = '';
+  document.getElementById('l5questions').innerHTML = '';
+  document.getElementById('fixPanel').innerHTML = '';
+  document.getElementById('l4explain').classList.remove('shown');
+  document.getElementById('errFoundCount').textContent = '0';
+  document.querySelectorAll('.step-btn').forEach((b,i)=>{b.classList.remove('active','locked');if(i>0)b.classList.add('locked');});
+  document.querySelectorAll('[id^="level"]').forEach(el=>el.classList.add('hidden'));
+  document.getElementById('level1').classList.remove('hidden');
+  document.getElementById('tab1').classList.add('active');
+  renderL2(); renderL3(); renderErrorPara(); renderL5();
+}
+
+/* ─────────── Init ─────────── */
+renderL2();
+renderL3();
+renderErrorPara();
+renderL5();
+</script>
+</body>
+</html>
